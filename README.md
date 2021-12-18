@@ -8,11 +8,12 @@ I chose to use congressional districts for two reasons: 1) congressional distric
 * Sodapy
 * Plotly and Plotly Express
 * Termcolor
+* ipywidgets
 ### **<font color = 'DarkBlue'> Data prerequisites </font>**
 - Download the Partisan Voting Index data from The Cook Political Report website https://www.cookpolitical.com/pvi-map-and-district-list. Click ‘Get the data’ at the end of the table in the link above. This should download a file named ‘data-5vPn3.csv’.
 - Obtain a key from the Virginia Department of Health to be able to pull out the updated COVID data. Go to https://dev.socrata.com/foundry/data.virginia.gov/bre9-aqqr and sign up for an App Token. Insert your given App Token, Key ID, and Key Secret in the indicated places in the “MyAppToken.txt” file. These are your PERSONAL identifiers.
 ## **<font color = 'DarkBlue'> Usage </font>**
-To run the code, open Main.ipynb and run all cells. 
+To run the code, open Main.ipynb in jupyter notebook and run all cells. 
 ### **<font color = 'DarkBlue'> Note </font>**
 While demographics data can be obtained for all US states, COVID-19 data is currently only available for the state of Virginia. <br> The first cell in the Main file runs all the necessary functions. The second cell obtains all the necessary DataFrames to plot the data. The third cell displays the selected visualization. Currently, only [map plots](Widgets.md) are available.<br>
 Most data are pulled directly from the source and saved to local directory in json format for quicker future access. So, the first run will take few minutes but will be much faster once the data are available locally.
