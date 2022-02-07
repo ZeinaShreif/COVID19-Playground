@@ -15,7 +15,7 @@ def Import_VDH_COVID_Data():
     #                  userame="user@example.com",
     #                  password="AFakePassword")
 
-    with open('MyAppToken.txt', 'r') as file:
+    with open('data/MyAppToken.txt', 'r') as file:
         Token = file.readline().strip('\n')
         Key_ID = file.readline().strip('\n')
         Key_Secret = file.readline().strip('\n')
