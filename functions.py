@@ -30,17 +30,14 @@ def Import_VDH_COVID_Data():
     results_df = pd.DataFrame.from_records(results)
     return results_df
 
-def Update_VDH_COVID_Data(dates_list):
+def Update_VDH_COVID_Data(date0):
     with open('data/MyAppToken.txt', 'r') as file:
         Token = file.readline().strip('\n')
         Key_ID = file.readline().strip('\n')
         Key_Secret = file.readline().strip('\n')
 
     client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
-    
-    results = client.get("bre9-aqqr", report_date = dates_list[0])
-    for d in dates_list[1:]:
-        results += client.get("bre9-aqqr", report_date = d)
+    results = client.get("bre9-aqqr", where = 'report_date > "{}"'.format(date0))
     
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
