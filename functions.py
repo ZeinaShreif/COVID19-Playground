@@ -22,9 +22,9 @@ def Import_VDH_COVID_Data():
 
     client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
 
-    # First 15000 results, returned as JSON from API / converted to Python list of
+    # First 150000 results, returned as JSON from API / converted to Python list of
     # dictionaries by sodapy.
-    results = client.get("bre9-aqqr")
+    results = client.get("bre9-aqqr", limit = 150000)
 
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
