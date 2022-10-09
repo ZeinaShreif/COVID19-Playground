@@ -67,3 +67,59 @@ def Update_VDH_COVID_Vaccines_Data(date0):
     # Convert to pandas DataFrame
     results_df = pd.DataFrame.from_records(results)
     return results_df
+
+def Import_VDH_COVID_Vaccines_By_Age_Data():
+    with open('data/MyAppToken.txt', 'r') as file:
+        Token = file.readline().strip('\n')
+        Key_ID = file.readline().strip('\n')
+        Key_Secret = file.readline().strip('\n')
+
+    client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
+
+    results = client.get("8fmk-qt4d", 
+    where = 'locality != "Not Reported" and locality != "Out-of-State" and age_group_type == "Case Age Group"', 
+    limit=9000000)
+    results_df = pd.DataFrame.from_records(results)
+    return results_df
+
+def Update_VDH_COVID_Vaccines_By_Age_Data(date0):
+    with open('data/MyAppToken.txt', 'r') as file:
+        Token = file.readline().strip('\n')
+        Key_ID = file.readline().strip('\n')
+        Key_Secret = file.readline().strip('\n')
+
+    client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
+    results = client.get("8fmk-qt4d", 
+    where = 'report_date >= "{}" and locality != "Not Reported" and locality != "Out-of-State" and age_group_type == "Case Age Group"'.format(date0), 
+    limit = 9000000)
+    
+    # Convert to pandas DataFrame
+    results_df = pd.DataFrame.from_records(results)
+    return results_df
+
+def Import_VDH_COVID_Vaccines_By_Sex_Data():
+    with open('data/MyAppToken.txt', 'r') as file:
+        Token = file.readline().strip('\n')
+        Key_ID = file.readline().strip('\n')
+        Key_Secret = file.readline().strip('\n')
+
+    client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
+
+    results = client.get("thwg-4app", limit=9000000)
+    results_df = pd.DataFrame.from_records(results)
+    return results_df
+
+def Update_VDH_COVID_Vaccines_By_Sex_Data(date0):
+    with open('data/MyAppToken.txt', 'r') as file:
+        Token = file.readline().strip('\n')
+        Key_ID = file.readline().strip('\n')
+        Key_Secret = file.readline().strip('\n')
+
+    client = Socrata('data.virginia.gov', Token, username = Key_ID, password = Key_Secret)
+    results = client.get("thwg-4app", 
+    where = 'report_date >= "{}"'.format(date0), 
+    limit = 9000000)
+    
+    # Convert to pandas DataFrame
+    results_df = pd.DataFrame.from_records(results)
+    return results_df
